@@ -1,7 +1,9 @@
-@extends('layouts.app')
-
-@section('content')
-
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
 	<div class="container">
 
 		@if($errors->any())
@@ -14,19 +16,20 @@
 			</div>
 		@endif
 
-		<form method="post" class="col col-sm-6">
+		<form action="{{route('book.update',$book->id)}}" method="post">
 			@csrf
+			<!-- @method('PUT') -->
 			<div class="form-group">
 				<label>Book Name</label>
-				<input type="text" name="book_name" class="form-control">
+				<input type="text" name="book_name" class="form-control" value="{{$book->book_name}}">
 			</div>
 			<div class="form-group">
 				<label>Author</label>
-				<input type="text" name="writer_name" class="form-control">
+				<input type="text" name="writer_name" class="form-control" value="{{$book->writer_name}}">
 			</div>
 			<div class="form-group">
 				<label>Price</label>
-				<input type="text" name="price" class="form-control">
+				<input type="text" name="price" class="form-control" value="{{$book->price}}">
 			</div>
 			<div class="form-group">
 				<label>Book Type</label>
@@ -40,10 +43,11 @@
 			</div>
 			<div class="form-group">
 				<label>Photo</label>
-				<input type="file" name="photo" class="form-control">
+				<input type="file" name="photo" class="form-control" value="{{$book->photo}}">
 			</div>
-			<input type="submit" value="Submit" class="btn btn-primary">
+			<input type="submit" value="Add Book Type" class="btn btn-primary">
 		</form>
 	</div>
 
-@endsection
+</body>
+</html>

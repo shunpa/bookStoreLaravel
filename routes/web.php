@@ -22,7 +22,11 @@ Route::get('/', 'BookController@index');
 Route::get('/books', 'BookController@index');
 
 Route::get('/books/add', 'BookController@add');
+Route::post('/upload-photo', 'BookController@upload_photo');
 Route::post('/books/add', 'BookController@create');
 Route::get('/books/delete/{id}', 'BookController@delete');
 Route::get('/books/edit/{id}', 'BookController@edit');
-Route::patch('/books/edit/{id}', 'BookController@update');
+Route::patch('/books/update/{id}', 'BookController@update');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

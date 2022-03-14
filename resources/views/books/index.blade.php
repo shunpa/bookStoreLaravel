@@ -1,16 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title></title>
-</head>
-<body>
-	<h1>Book List</h1>
-	<!-- Left Side Of Navbar -->
-	<ul class="navbar-nav mr-auto">
-		<li class="nav-item">
-			<a class="nav-link text-success" href="{{ url('/books/add') }}">+ Add Book</a>
-		</li>
-	</ul>
+@extends("layouts.app")
+
+@section("content")
+
 	<div class="container">
 
 		@if(session('info'))
@@ -21,22 +12,74 @@
 
 		{{ $books->links() }}
 
-		@foreach($books as $book)
-			<div class="card mb-2">
-				<div class="card-body">
-					<img src="/storage/images/{{$book->photo}}">
-					<h5 class="card-title">{{ $book->book_name }}</h5>
-					<div class="card-subtitle mb-2 text-muted small">
-						{{ $book->created_at->diffForHumans() }}
-					</div>
-					<p class="card-text">{{ $book->price }}</p>
-					<p class="card-text">{{ $book->writer_name }}</p>
-					
-					<a class="btn btn-warning" href="{{ url("/books/delete/$book->id") }}">Delete</a>
 
-				</div>
-			</div>
-		@endforeach
+		<div class="card shadow mb-4">
+
+			<div class="card-body">
+				<div class="table-responsive">
+					<table class="table"  width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								
+                				<th>Book Name</th>
+								<th>Photo</th>
+								<th>Author</th>
+								<th>Price</th>
+								<th>Book Type</th>
+                    			<th></th>
+                				<th></th>
+							</tr>
+            			</thead>
+
+             			<tbody>
+
+              			<tr>
+							  @foreach($books as $book)
+
+
+              			<td value="" name="">
+						  {{ $book->book_name }}      
+              			</td>
+
+                    	<td><img src="/storage/images/{{$book->photo}}" width="150" height="100"></td>
+
+              			<td>{{ $book->writer_name }}</td>
+              			<td>{{ $book->price }}</td>
+
+						
+              			<td >
+						  {{ $book->booktype_id }}
+
+              			</td>
+						
+
+            			<td>
+
+            				<a href="{{ url("/books/delete/$book->id") }}" onclick="return confirm('Are you sure you want to delete?');">
+            					<button type="button" class="btn btn-outline-danger">
+            						<!-- <i class="fas fa-trash-alt"></i> -->Delete
+            					</button>
+            				</a>
+            			</td>
+
+            			<td>
+            				<a href="{{ url("/books/edit/$book->id") }}">
+            					<button type="button" class="btn btn-outline-primary">
+            						<!-- <i class="fas fa-edit"></i> -->Edit
+            					</button>  
+            				</a>
+            			</td>
+
+
+            		</tr>
+
+					@endforeach
+
+            </tbody>
+        </table>
+    </div>
+
+		
 	</div>
-</body>
-</html>
+
+@endsection
